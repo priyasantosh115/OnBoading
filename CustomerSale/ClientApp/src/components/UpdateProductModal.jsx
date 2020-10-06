@@ -69,7 +69,6 @@ export default class UpdateProductModal extends Component{
     onChange=(e)=>{
         this.setState({[e.target.name]:e.target.value});
         this.setState({[e.target.price]:e.target.value});
-        this.validateFunction();
         this.forceUpdate();
     };
 
@@ -123,7 +122,7 @@ export default class UpdateProductModal extends Component{
                           placeholder='Your Name'
                           defaultValue={this.state.name}
                           name='name'
-                          onChange={this.onChange} 
+                          onKeyUp={(evt) => this.onChange(evt)} 
                           required
                           error={this.state.nameError}
                           ></Form.Input> 
@@ -133,7 +132,7 @@ export default class UpdateProductModal extends Component{
                           placeholder='Product Price'
                           name='price'
                           defaultValue={this.state.price}
-                          onChange={this.onChange} 
+                          onKeyUp={this.onChange} 
                           required
                           error={this.state.priceError}
                           ></Form.Input> 

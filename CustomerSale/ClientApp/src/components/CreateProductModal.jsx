@@ -4,7 +4,7 @@ import { Button, Header, Icon, Modal, Form } from 'semantic-ui-react';
 const initialState={
     open:false,
     name:'',
-    price:'',
+    price:0,
     nameError:'',
     priceError:''
 }
@@ -59,7 +59,7 @@ export default class CreateProductModal extends Component{
             this.forceUpdate();
         }else
         {
-            const data={name:this.state.name,address:this.state.address}
+            const data={name:this.state.name,price:this.state.price}
             fetch('https://priyankaapp.azurewebsites.net/Product/Create',{
                 method:'POST',
                 body:JSON.stringify(data),
@@ -78,7 +78,6 @@ export default class CreateProductModal extends Component{
 
   onChange=(e)=>{
       this.setState({[e.target.name]:e.target.value});
-      this.setState({[e.target.price]:e.target.value});
       this.validateFunction();
       this.forceUpdate();
   }

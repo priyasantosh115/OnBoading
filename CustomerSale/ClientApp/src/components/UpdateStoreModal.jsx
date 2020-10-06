@@ -69,7 +69,6 @@ export default class UpdateStoreModal extends Component{
     onChange=(e)=>{
         this.setState({[e.target.name]:e.target.value});
         this.setState({[e.target.address]:e.target.value});
-        this.validateFunction();
         this.forceUpdate();
     };
 
@@ -110,7 +109,7 @@ export default class UpdateStoreModal extends Component{
                   centered>
 
                   <Header>
-                    Update Customer
+                    Update Store
                   </Header>
                   <Modal.Content>
                   <Form  onSubmit={this.handleUpdate} >
@@ -123,7 +122,7 @@ export default class UpdateStoreModal extends Component{
                           placeholder='Store Name'
                           defaultValue={this.state.name}
                           name='name'
-                          onChange={this.onChange} 
+                          onKeyUp={(evt) => this.onChange(evt)} 
                           required
                           error={this.state.nameError}
                           ></Form.Input> 
@@ -133,7 +132,7 @@ export default class UpdateStoreModal extends Component{
                           placeholder='Store Address'
                           name='address'
                           defaultValue={this.state.address}
-                          onChange={this.onChange} 
+                          onKeyUp={this.onChange} 
                           required
                           error={this.state.addressError}
                           ></Form.Input> 
