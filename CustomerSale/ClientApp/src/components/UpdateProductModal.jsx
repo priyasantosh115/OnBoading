@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Button, Header, Icon, Modal,Form } from 'semantic-ui-react';
+import validator from 'validator';
 
 const initialState={
     open:false,
@@ -31,11 +32,16 @@ export default class UpdateProductModal extends Component{
         {
             this.state.nameError = "";
         }
-        if(!this.state.priceError){
+        if (validator.isEmpty(this.state.price)) {
             priceError="Product's Price is required";
             this.state.priceError = priceError;
             notError = false;
         }
+        else if (!validator.isNumeric(this.state.price)) {
+            priceError= 'number allowed only';
+            this.state.priceError = priceError;
+            notError = false;
+        } 
         else
         {
             this.state.priceError = "";
@@ -68,7 +74,6 @@ export default class UpdateProductModal extends Component{
 
     onChange=(e)=>{
         this.setState({[e.target.name]:e.target.value});
-        this.setState({[e.target.price]:e.target.value});
         this.forceUpdate();
     };
 
@@ -131,6 +136,7 @@ export default class UpdateProductModal extends Component{
                           label='Price'
                           placeholder='Product Price'
                           name='price'
+                          pattern="[0-9]*"
                           defaultValue={this.state.price}
                           onKeyUp={this.onChange} 
                           required
